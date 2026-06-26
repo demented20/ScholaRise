@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScholaRise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   ScholaRise — REFINED DESIGN SYSTEM
+   Palette: collegiate navy + aged gold + cream paper
+   Enhanced with depth layers, glassmorphism, and motion.
+=========================================================== */
+
+:root{
+  --navy:#16243f;
+  --navy-light:#22365c;
+  --navy-deep:#0d1730;
+  --cream:#f6f1e4;
+  --paper:#fffdf7;
+  --gold:#c9a227;
+  --gold-light:#e7c766;
+  --brick:#b5482d;
+  --forest:#2f6b42;
+  --ink:#1c1a14;
+  --muted:#75695a;
+  --line:#dcd3bd;
+  --line-soft:#ece6d6;
+  --radius:14px;
+  --radius-sm:10px;
+  --shadow-sm: 0 1px 2px rgba(22,36,63,0.04), 0 1px 3px rgba(22,36,63,0.06);
+  --shadow-md: 0 4px 6px -1px rgba(22,36,63,0.06), 0 2px 4px -2px rgba(22,36,63,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(22,36,63,0.08), 0 4px 6px -4px rgba(22,36,63,0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(22,36,63,0.1), 0 8px 10px -6px rgba(22,36,63,0.04);
+  --shadow-gold: 0 0 0 1px rgba(201,162,39,0.15), 0 4px 20px rgba(201,162,39,0.2);
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  line-height:1.5;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-track{background:var(--cream);border-radius:4px;}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--muted);}
+
+h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
+.mono,.ledger,.points{font-family:'IBM Plex Mono',monospace;}
+a{color:inherit;text-decoration:none;}
+button{
+  font-family:'Inter',system-ui,sans-serif;
+  cursor:pointer;
+  border:none;
+  border-radius:8px;
+  padding:10px 18px;
+  font-weight:600;
+  font-size:13.5px;
+  transition:all var(--transition-fast);
+  position:relative;
+  overflow:hidden;
+}
+button::after{
+  content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background var(--transition-fast);
+}
+button:hover::after{background:rgba(255,255,255,0.08);}
+button:active{transform:translateY(1px) scale(0.98);}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:8px;}
+
+button.primary{
+  background:linear-gradient(180deg, var(--navy-light), var(--navy));
+  color:var(--gold-light);
+  box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+button.primary:hover{
+  background:linear-gradient(180deg, #2a3f66, var(--navy-light));
+  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform:translateY(-1px);
+}
+button.gold{
+  background:linear-gradient(180deg, var(--gold-light), var(--gold));
+  color:var(--navy-deep);
+  box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+button.gold:hover{
+  background:linear-gradient(180deg, #f0d77a, var(--gold-light));
+  box-shadow:var(--shadow-gold);
+  transform:translateY(-1px);
+}
+button.outline{
+  background:transparent;
+  border:1.5px solid var(--navy);
+  color:var(--navy);
+  box-shadow:var(--shadow-sm);
+}
+button.outline:hover{
+  background:var(--navy);
+  color:var(--gold-light);
+  transform:translateY(-1px);
+  box-shadow:var(--shadow-md);
+}
+button.ghost{
+  background:transparent;
+  color:var(--muted);
+  padding:6px 12px;
+  font-size:12.5px;
+  border-radius:6px;
+}
+button.ghost:hover{
+  background:rgba(22,36,63,0.04);
+  color:var(--navy);
+}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none !important;}
+button:disabled::after{display:none;}
+
+input,select,textarea{
+  font-family:'Inter',system-ui,sans-serif;
+  border:1.5px solid var(--line);
+  border-radius:8px;
+  padding:10px 12px;
+  font-size:13.5px;
+  background:var(--paper);
+  color:var(--ink);
+  transition:border-color var(--transition-fast), box-shadow var(--transition-fast);
+  width:100%;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,162,39,0.15);
+  outline:none;
+}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2375695a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+
+/* ---------- HEADER / LETTERHEAD ---------- */
+header.letterhead{
+  background:linear-gradient(165deg, var(--navy-deep) 0%, var(--navy) 60%, var(--navy-light) 100%);
+  color:var(--cream);
+  padding:20px 28px 0;
+  border-bottom:6px double var(--gold);
+  position:relative;
+  overflow:hidden;
+}
+header.letterhead::before{
+  content:'';position:absolute;top:-50%;right:-10%;width:600px;height:600px;
+  background:radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 70%);
+  pointer-events:none;
+}
+.letterhead-row{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;max-width:1200px;margin:0 auto;
+  position:relative;z-index:1;
+}
+.crest-block{display:flex;align-items:center;gap:14px;}
+.crest{
+  width:48px;height:48px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #e7c766, #c9a227 55%, #8a7016 100%);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  box-shadow:0 0 0 3px var(--navy-deep), 0 0 0 5px rgba(201,162,39,0.4), 0 4px 12px rgba(0,0,0,0.3);
+  transition:transform var(--transition-fast);
+}
+.crest:hover{transform:rotate(-5deg) scale(1.05);}
+.crest-text .brand{font-size:22px;font-weight:600;letter-spacing:0.3px;text-shadow:0 2px 4px rgba(0,0,0,0.2);}
+.crest-text .sub{font-size:11px;letter-spacing:2.8px;text-transform:uppercase;color:var(--gold-light);opacity:.9;font-weight:500;}
+.header-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.user-switch select{
+  background:rgba(255,255,255,0.08);
+  color:var(--cream);
+  border-color:rgba(255,255,255,0.15);
+  border-radius:8px;
+  font-size:13px;
+  padding:8px 28px 8px 12px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e7c766' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-position:right 10px center;
+  min-width:120px;
+}
+.user-switch select:focus{box-shadow:0 0 0 3px rgba(231,199,102,0.25);border-color:var(--gold-light);}
+.bell{
+  position:relative;background:rgba(255,255,255,0.08);color:var(--gold-light);
+  border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;padding:0;font-size:16px;
+  border:1px solid rgba(255,255,255,0.1);
+  transition:all var(--transition-fast);
+}
+.bell:hover{background:rgba(255,255,255,0.15);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+.bell:active{transform:translateY(0) scale(0.95);}
+.bell .dot{
+  position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:var(--brick);
+  border:2px solid var(--navy);display:none;box-shadow:0 0 0 2px rgba(181,72,45,0.3);
+  animation:pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(181,72,45,0.4);}50%{box-shadow:0 0 0 4px rgba(181,72,45,0);}}
+
+/* Glassmorphism notification panel */
+.notif-panel{
+  position:absolute;right:28px;top:68px;width:340px;max-height:380px;overflow-y:auto;
+  background:rgba(255,253,247,0.95);
+  color:var(--ink);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-xl);
+  display:none;z-index:50;
+  border:1px solid rgba(220,211,189,0.6);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.notif-panel.open{display:block;animation:panelIn 0.2s ease;}
+@keyframes panelIn{from{opacity:0;transform:translateY(-8px) scale(0.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+.notif-item{padding:12px 16px;border-bottom:1px solid var(--line-soft);font-size:13px;transition:background var(--transition-fast);}
+.notif-item:hover{background:rgba(246,241,228,0.5);}
+.notif-item:last-child{border-bottom:none;}
+.notif-item .t{font-size:11px;color:var(--muted);margin-top:4px;font-family:'IBM Plex Mono',monospace;}
+
+/* stat strip */
+.stat-strip{
+  max-width:1200px;margin:16px auto 0;display:flex;gap:14px;flex-wrap:wrap;
+  padding:12px 0 18px;position:relative;z-index:1;
+}
+.stat-chip{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(231,199,102,0.25);
+  border-radius:10px;padding:8px 14px;display:flex;flex-direction:column;min-width:90px;
+  transition:all var(--transition-fast);
+}
+.stat-chip:hover{background:rgba(255,255,255,0.1);border-color:rgba(231,199,102,0.4);transform:translateY(-1px);}
+.stat-chip .v{font-family:'IBM Plex Mono',monospace;font-size:17px;color:var(--gold-light);font-weight:600;letter-spacing:-0.02em;}
+.stat-chip .k{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#b9c2d8;font-weight:500;margin-top:2px;}
+.level-pill{
+  background:linear-gradient(135deg, var(--gold-light), var(--gold));
+  color:var(--navy-deep);font-family:'IBM Plex Mono',monospace;
+  border-radius:20px;padding:8px 16px;font-weight:700;font-size:13px;align-self:center;
+  box-shadow:0 2px 8px rgba(201,162,39,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+  border:1px solid rgba(138,112,22,0.2);
+}
+.xp2x-flag{background:var(--brick);color:#fff;border-radius:20px;padding:7px 14px;font-size:11.5px;align-self:center;font-weight:600;box-shadow:0 2px 8px rgba(181,72,45,0.25);display:none;}
+
+/* ---------- TAB BAR ---------- */
+nav.tabbar{
+  max-width:1200px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;
+  padding:0 28px;background:var(--navy);
+  scrollbar-width:none;
+}
+nav.tabbar::-webkit-scrollbar{display:none;}
+nav.tabbar button.tab{
+  background:transparent;color:#a8b5cc;border-radius:0;padding:14px 18px;font-size:13px;
+  border-bottom:3px solid transparent;white-space:nowrap;font-weight:600;
+  transition:all var(--transition-fast);position:relative;
+}
+nav.tabbar button.tab:hover{color:#fff;background:rgba(255,255,255,0.03);}
+nav.tabbar button.tab.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+nav.tabbar button.tab.active::after{
+  content:'';position:absolute;bottom:-3px;left:50%;transform:translateX(-50%);
+  width:24px;height:3px;background:var(--gold);border-radius:2px;
+}
+
+main{max-width:1200px;margin:0 auto;padding:28px 28px 100px;}
+.grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.grid2{grid-template-columns:1fr;}.grid3{grid-template-columns:1fr;}}
+
+/* ---------- CARDS ---------- */
+.card{
+  background:var(--paper);
+  border:1px solid var(--line-soft);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+}
+.card:hover{
+  box-shadow:var(--shadow-md);
+  border-color:var(--line);
+  transform:translateY(-1px);
+}
+.card h2{margin:0 0 6px;font-size:20px;font-weight:600;color:var(--navy-deep);}
+.card .hint{color:var(--muted);font-size:13px;margin:0 0 18px;line-height:1.5;}
+.section-title{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);font-weight:700;margin:28px 0 12px;}
+.section-title:first-of-type{margin-top:0;}
+
+/* ---------- TIMER ---------- */
+.timer-display{
+  font-family:'IBM Plex Mono',monospace;font-size:56px;font-weight:600;color:var(--navy);
+  text-align:center;letter-spacing:2px;margin:12px 0 6px;
+  text-shadow:0 2px 4px rgba(22,36,63,0.06);
+}
+.timer-loc-glow{box-shadow:0 0 0 3px var(--gold-light), 0 0 24px rgba(201,162,39,0.35);}
+.timer-controls{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+.daily-goal-row{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap;}
+.progress-track{
+  background:var(--cream);
+  border-radius:20px;
+  height:10px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,0.04);
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg, var(--gold), var(--forest));
+  border-radius:20px;
+  transition:width var(--transition-slow) cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,0.05);
+  position:relative;
+}
+.progress-fill::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:20px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3));
+  border-radius:0 20px 20px 0;
+}
+
+/* heatmap */
+.heatmap{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:10px;}
+.heat-cell{
+  aspect-ratio:1;border-radius:5px;background:#e8e2d2;
+  transition:all var(--transition-fast);cursor:pointer;
+  border:1px solid transparent;
+}
+.heat-cell:hover{transform:scale(1.15);z-index:1;border-color:var(--muted);box-shadow:var(--shadow-sm);}
+.heat-cell[data-lv="1"]{background:#cfe6cf;}
+.heat-cell[data-lv="2"]{background:#9bcf9f;}
+.heat-cell[data-lv="3"]{background:#5fb068;}
+.heat-cell[data-lv="4"]{background:var(--forest);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.15);}
+.heat-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:8px;font-weight:500;}
+
+/* ---------- BADGES ---------- */
+.badge-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;}
+.medal{
+  width:64px;height:72px;display:flex;flex-direction:column;align-items:center;
+  position:relative;font-size:24px;
+  transition:transform var(--transition-fast);
+}
+.medal:hover{transform:translateY(-4px);}
+.medal .disc{
+  width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  box-shadow:0 3px 8px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.2);
+}
+.medal .disc.t1{background:radial-gradient(circle at 35% 30%, #d9a06c, #a85f2c 70%);}
+.medal .disc.t2{background:radial-gradient(circle at 35% 30%, #e8e8e8, #9aa0a6 70%);}
+.medal .disc.t3{background:radial-gradient(circle at 35% 30%, #f0d77a, #c9a227 55%, #8a7016 100%);}
+.medal .disc::after{
+  content:'';position:absolute;top:-60%;left:-60%;width:50%;height:220%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  transform:rotate(25deg);
+  animation:shine 3.5s ease-in-out infinite;
+}
+@keyframes shine{0%,75%{left:-60%;}100%{left:160%;}}
+.medal .label{font-size:10px;text-align:center;color:var(--muted);margin-top:4px;line-height:1.3;font-weight:500;}
+.medal .tier-tag{font-size:9px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ink);font-weight:700;}
+
+/* ---------- PILLS ---------- */
+.pillbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.pill{
+  border:1.5px solid var(--line-soft);
+  background:var(--paper);
+  border-radius:24px;
+  padding:7px 16px;
+  font-size:13px;
+  cursor:pointer;
+  font-weight:600;
+  color:var(--muted);
+  transition:all var(--transition-fast);
+  box-shadow:var(--shadow-sm);
+}
+.pill:hover{border-color:var(--line);color:var(--navy);transform:translateY(-1px);box-shadow:var(--shadow-md);}
+.pill.active{
+  background:var(--navy);
+  color:var(--gold-light);
+  border-color:var(--navy);
+  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* ---------- QUESTIONS ---------- */
+.question{
+  border:1px solid var(--line-soft);
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:14px;
+  background:var(--paper);
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow var(--transition-base), border-color var(--transition-base);
+}
+.question:hover{box-shadow:var(--shadow-md);border-color:var(--line);}
+.question .qmeta{font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:500;}
+.question .qtext{font-size:15px;margin-bottom:10px;line-height:1.6;color:var(--ink);font-weight:500;}
+.reply{
+  background:linear-gradient(180deg, var(--cream), #f0ebe0);
+  border-radius:10px;
+  padding:12px 14px;
+  margin-top:10px;
+  font-size:13.5px;
+  border:1px solid var(--line-soft);
+  position:relative;
+}
+.reply::before{
+  content:'';position:absolute;top:-6px;left:20px;width:12px;height:12px;
+  background:var(--cream);border-left:1px solid var(--line-soft);border-top:1px solid var(--line-soft);
+  transform:rotate(45deg);
+}
+.reply .rmeta{font-size:11px;color:var(--muted);display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap;}
+.tag{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--gold);
+  color:var(--navy-deep);
+  font-size:10px;
+  font-weight:700;
+  border-radius:5px;
+  padding:3px 8px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  box-shadow:0 1px 2px rgba(0,0,0,0.06);
+}
+.tag.verified{background:var(--forest);color:#fff;}
+.tag.community{background:var(--navy);color:var(--gold-light);}
+
+/* ---------- SESSIONS ---------- */
+.session-card{
+  border:1px solid var(--line-soft);
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:12px;
+  background:var(--paper);
+  box-shadow:var(--shadow-sm);
+  transition:all var(--transition-base);
+}
+.session-card:hover{box-shadow:var(--shadow-md);border-color:var(--line);transform:translateY(-1px);}
+.session-card .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.status-pill{font-size:11px;font-weight:700;text-transform:uppercase;padding:4px 12px;border-radius:20px;letter-spacing:0.5px;}
+.status-open{background:#e9f1e9;color:var(--forest);border:1px solid rgba(47,107,66,0.15);}
+.status-full{background:#fdf1e6;color:var(--brick);border:1px solid rgba(181,72,45,0.15);}
+.status-confirmed{background:var(--navy);color:var(--gold-light);border:1px solid rgba(22,36,63,0.2);box-shadow:0 2px 4px rgba(22,36,63,0.1);}
+.slot-dots{display:flex;gap:5px;margin-top:8px;}
+.slot-dot{width:10px;height:10px;border-radius:50%;background:var(--line-soft);transition:all var(--transition-fast);}
+.slot-dot.filled{background:var(--forest);box-shadow:0 0 0 2px rgba(47,107,66,0.15);}
+
+/* ---------- QUESTS ---------- */
+.quest-card{
+  border:1px solid var(--line-soft);
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:12px;
+  background:var(--paper);
+  box-shadow:var(--shadow-sm);
+  transition:all var(--transition-base);
+  position:relative;
+  overflow:hidden;
+}
+.quest-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.quest-card.done{
+  border-color:var(--forest);
+  background:linear-gradient(135deg, #f4faf4, #eaf5ea);
+  box-shadow:0 2px 8px rgba(47,107,66,0.08);
+}
+.quest-card.done::before{
+  content:'✓';position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  font-size:24px;color:var(--forest);opacity:0.15;font-weight:700;
+}
+
+/* chest */
+.chest-wrap{text-align:center;padding:20px 0;}
+.chest{font-size:64px;display:inline-block;transition:transform var(--transition-slow);cursor:pointer;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.1));}
+.chest:hover{transform:scale(1.05) rotate(-3deg);}
+.chest.shake{animation:shake 0.6s ease;}
+@keyframes shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(6deg)}}
+.chest.open{transform:scale(1.2);filter:drop-shadow(0 0 20px rgba(201,162,39,0.4));}
+
+/* ---------- SHOP ---------- */
+.shop-item{
+  border:1px solid var(--line-soft);
+  border-radius:12px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  background:var(--paper);
+  box-shadow:var(--shadow-sm);
+  transition:all var(--transition-base);
+}
+.shop-item:hover{box-shadow:var(--shadow-md);border-color:var(--line);transform:translateY(-2px);}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px;}
+.gem-cost{font-family:'IBM Plex Mono',monospace;color:var(--navy);font-weight:600;font-size:15px;}
+
+/* ---------- MAP ---------- */
+.campus-map{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media(max-width:600px){.campus-map{grid-template-columns:repeat(2,1fr);}}
+.loc-box{
+  border:2px solid var(--line-soft);
+  border-radius:12px;
+  padding:20px 14px;
+  text-align:center;
+  cursor:pointer;
+  background:var(--paper);
+  position:relative;
+  transition:all var(--transition-base);
+  box-shadow:var(--shadow-sm);
+}
+.loc-box:hover{
+  box-shadow:var(--shadow-lg);
+  border-color:var(--line);
+  transform:translateY(-3px);
+  z-index:1;
+}
+.loc-box.lucky{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,162,39,0.15), 0 8px 24px rgba(201,162,39,0.2);
+  background:linear-gradient(135deg, var(--paper), #fffbf0);
+}
+.loc-box .occ{font-size:11px;font-weight:700;text-transform:uppercase;margin-top:8px;letter-spacing:0.5px;}
+.occ-green{color:var(--forest);background:rgba(47,107,66,0.08);padding:2px 8px;border-radius:10px;display:inline-block;}
+.occ-yellow{color:#a3791b;background:rgba(163,121,27,0.08);padding:2px 8px;border-radius:10px;display:inline-block;}
+.occ-red{color:var(--brick);background:rgba(181,72,45,0.08);padding:2px 8px;border-radius:10px;display:inline-block;}
+
+/* ---------- TRANSCRIPT ---------- */
+.transcript{
+  background:linear-gradient(180deg, var(--paper), #faf8f2);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+  position:relative;
+  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.8);
+}
+.transcript::before{
+  content:'OFFICIAL STUDY TRANSCRIPT';
+  position:absolute;top:16px;right:24px;
+  font-size:10px;letter-spacing:2px;color:var(--muted);
+  font-family:'IBM Plex Mono',monospace;
+  opacity:0.7;
+}
+.ledger-line{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:14px;
+  padding:9px 0;
+  border-bottom:1px dotted var(--line);
+  transition:background var(--transition-fast);
+}
+.ledger-line:hover{background:rgba(246,241,228,0.4);margin:0 -12px;padding:9px 12px;border-radius:6px;}
+.ledger-line .k{color:var(--ink);font-weight:500;}
+.ledger-line .v{font-weight:600;color:var(--navy);font-size:15px;}
+.ledger-line.total{border-bottom:none;border-top:2px solid var(--ink);margin-top:6px;padding-top:12px;font-size:17px;}
+.avatar-frame{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg, var(--cream), #ebe5d4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;border:3px solid var(--line);
+  box-shadow:var(--shadow-sm);
+  transition:all var(--transition-base);
+}
+.avatar-frame.golden{
+  border-color:var(--gold);
+  box-shadow:0 0 0 4px var(--gold-light), 0 4px 12px rgba(201,162,39,0.25);
+  background:linear-gradient(135deg, #fffbf0, var(--cream));
+}
+.profile-head{display:flex;gap:18px;align-items:center;margin-bottom:20px;}
+.profile-banner{
+  border-radius:10px;
+  padding:16px 18px;
+  color:#fff;
+  font-style:italic;
+  font-family:'Fraunces',serif;
+  font-size:15px;
+  line-height:1.5;
+  box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.15);
+  text-shadow:0 1px 2px rgba(0,0,0,0.2);
+  position:relative;
+  overflow:hidden;
+}
+.profile-banner::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+  pointer-events:none;
+}
+
+/* leaderboard */
+.lb-row{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid var(--line-soft);
+  transition:background var(--transition-fast);
+}
+.lb-row:hover{background:rgba(246,241,228,0.3);margin:0 -12px;padding:11px 12px;border-radius:8px;}
+.lb-rank{font-family:'IBM Plex Mono',monospace;width:30px;color:var(--muted);font-weight:600;font-size:15px;}
+.lb-rank.top{color:var(--gold);font-size:17px;text-shadow:0 1px 2px rgba(201,162,39,0.2);}
+.lb-name{flex:1;font-weight:600;font-size:14px;}
+.lb-xp{font-family:'IBM Plex Mono',monospace;color:var(--navy);font-weight:600;background:rgba(22,36,63,0.04);padding:3px 10px;border-radius:6px;font-size:13px;}
+
+/* toasts */
+#toastHost{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:10px;z-index:200;pointer-events:none;}
+.toast{
+  background:linear-gradient(135deg, var(--navy-deep), var(--navy));
+  color:var(--cream);
+  padding:14px 18px;
+  border-radius:12px;
+  font-size:13.5px;
+  border-left:4px solid var(--gold);
+  box-shadow:var(--shadow-xl);
+  max-width:320px;
+  pointer-events:auto;
+  animation:slidein 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.05);
+}
+@keyframes slidein{from{transform:translateX(40px) scale(0.95);opacity:0;}to{transform:translateX(0) scale(1);opacity:1;}}
+.toast.fade{animation:fadeout 0.35s ease forwards;}
+@keyframes fadeout{to{opacity:0;transform:translateX(20px) scale(0.95);}}
+.toast .tt{font-weight:700;color:var(--gold-light);font-size:11.5px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+
+/* utilities */
+.muted{color:var(--muted);font-size:13px;}
+.flexrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.spacer{height:10px;}
+hr.rule{border:none;border-top:1px solid var(--line-soft);margin:20px 0;}
+.checkbox-row{display:flex;align-items:center;gap:10px;font-size:13.5px;cursor:pointer;}
+.checkbox-row input[type="checkbox"]{
+  width:18px;height:18px;accent-color:var(--navy);cursor:pointer;
+}
+.marathon-banner{
+  background:linear-gradient(90deg, var(--brick), #7a2c18);
+  color:#fff;
+  border-radius:12px;
+  padding:12px 16px;
+  font-weight:600;
+  font-size:13px;
+  margin-bottom:20px;
+  display:none;
+  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.05);
+  position:relative;
+  overflow:hidden;
+}
+.marathon-banner::before{
+  content:'';position:absolute;right:-20px;top:-50%;width:200px;height:200px;
+  background:radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+}
+.marathon-banner.show{display:block;animation:bannerIn 0.4s ease;}
+@keyframes bannerIn{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+
+/* Empty states */
+p.muted:only-child{padding:20px 0;text-align:center;font-style:italic;opacity:0.7;}
+
+/* Subtle page entrance */
+main > * {animation:fadeUp 0.4s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<header class="letterhead">
+  <div class="letterhead-row">
+    <div class="crest-block">
+      <div class="crest">🎓</div>
+      <div class="crest-text">
+        <div class="brand">ScholaRise</div>
+        <div class="sub"></div>
+      </div>
+    </div>
+    <div class="header-controls">
+      <div class="user-switch">
+        <select id="userSwitcher" class="mono" onchange="switchUser(this.value)"></select>
+      </div>
+      <div class="level-pill mono" id="levelPill">LV 1</div>
+      <div class="xp2x-flag mono" id="xp2xFlag">2× ACTIVE</div>
+      <button class="bell" id="bellBtn" onclick="toggleNotifPanel()">🔔<span class="dot" id="bellDot"></span></button>
+    </div>
+  </div>
+  <div class="stat-strip" id="statStrip"></div>
+  <div class="notif-panel" id="notifPanel"></div>
+</header>
+
+<nav class="tabbar" id="tabBar"></nav>
+
+<main id="tabContent"></main>
+
+<div id="toastHost"></div>
+
+<script>
+/* ===========================================================
+   ScholaRise — APPLICATION LOGIC
+   All gamification rules below are commented inline next to
+   the code that enforces them, per the spec's "explain the
+   rules" requirement. State is persisted to localStorage so
+   the prototype survives refreshes during a demo recording.
+=========================================================== */
+
+const LOCATIONS = ["Library","Study Hall","Classroom A","Student Center","Quad","Lab"];
+const SUBJECTS = ["Calculus","Physics","Linear Algebra","Programming"];
+const STORAGE_KEY = "ScholaRise_state_v1";
+
+/* ---------- DEFAULT STATE FACTORY ---------- */
+function freshUser(name, seed){
+  return {
+    name,
+    sp:0, cp:0, slp:0, lp:0, xp:0, gems:seed?40:0,
+    level:1,
+    badges:{},              // { key: tier(1-3) }
+    streak:0,               // consecutive study-days streak
+    lastStudyDate:null,
+    loginStreak:0,
+    lastLogin:null,
+    streakFreeze:false,
+    doubleXPUntil:0,
+    heatmap:{},             // { 'YYYY-MM-DD': minutes }
+    subjectCP:{Calculus:0,Physics:0,"Linear Algebra":0,Programming:0},
+    subjectUpvotes:{Calculus:0,Physics:0,"Linear Algebra":0,Programming:0},
+    locationsStudied:{},    // set of distinct locations
+    locationSessionCount:{},// per-location session counts
+    quietSessionCount:0,
+    sessionsAttended:0,
+    goalCrusherDate:null,
+    motto:"",
+    avatarAccessory:"",
+    bannerColor:"",
+    friends:[],             // [{name, weeklyHours, streak, badgeCount}]
+    pledge:null,            // {goal, weekStart, achieved}
+    cheersToday:0,
+    cheerDate:null,
+    isPrivateGroupsUnlocked:false
+  };
+}
+
+function defaultState(){
+  const today = todayStr();
+  return {
+    currentUser:"me",
+    users:{
+      me: freshUser("You", false),
+      alice: Object.assign(freshUser("Alice", true), {
+        sp:210, cp:140, slp:90, lp:35, xp:475, level:3,
+        badges:{helper:2, community_approved:1},
+        streak:3, lastStudyDate:yesterdayStr(),
+        subjectCP:{Calculus:60,Physics:30,"Linear Algebra":10,Programming:40},
+        locationsStudied:{Library:true,"Study Hall":true},
+        sessionsAttended:2
+      })
+    },
+    questions:[
+      {
+        id:"q1", subject:"Calculus", author:"alice",
+        text:"How do I find the second derivative of x^3·sin(x)? My product rule keeps tangling up.",
+        time:Date.now()-3600_000, insightfulBy:[], replies:[
+          {id:"r1", author:"alice", text:"Apply product rule twice and keep terms organized in a table — it untangles fast.",
+           upvotes:0, upvoters:[], helpful:false, time:Date.now()-3000_000}
+        ]
+      }
+    ],
+    sessions:[],
+    sessionPairCounts:{}, // "userA|userB" -> count of co-attended confirmed sessions
+    dailyQuests:{ date:today, list: rollDailyQuests(), chestOpened:false },
+    luckyLocation:{date:today, location:pick(LOCATIONS)},
+    occupancy:{date:today, map:rollOccupancy(today)},
+    examMarathon:false,
+    subjectWeek:null,
+    leaderboardResetMonth: new Date().getMonth(),
+    weeklyLeaderboardWeek: weekKey(new Date()),
+    notifications:[]
+  };
+}
+
+/* ---------- HELPERS ---------- */
+function todayStr(d=new Date()){return d.toISOString().slice(0,10);}
+function yesterdayStr(){const d=new Date();d.setDate(d.getDate()-1);return todayStr(d);}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function weekKey(d){const onejan=new Date(d.getFullYear(),0,1);const week=Math.ceil((((d-onejan)/86400000)+onejan.getDay()+1)/7);return d.getFullYear()+"-W"+week;}
+function seededRand(str){let h=0;for(let i=0;i<str.length;i++){h=(h*31+str.charCodeAt(i))|0;}return Math.abs(h%1000)/1000;}
+function rollOccupancy(dateStr){
+  const map={};
+  LOCATIONS.forEach(loc=>{
+    const r = seededRand(dateStr+loc);
+    map[loc] = r<0.34?"green":r<0.7?"yellow":"red";
+  });
+  return map;
+}
+function rollDailyQuests(){
+  const pool = [
+    {id:"q_study2h", desc:"Study 2 hours today", type:"studyMinutes", target:120, reward:{type:"SP",amount:50}},
+    {id:"q_answer3", desc:"Answer 3 questions in any subject", type:"answers", target:3, reward:{type:"CP",amount:30}},
+    {id:"q_group3", desc:"Start a study session for 3 people", type:"sessionCreated3", target:1, reward:{type:"SLP",amount:20}},
+    {id:"q_study1h", desc:"Study 1 hour today", type:"studyMinutes", target:60, reward:{type:"SP",amount:25}},
+    {id:"q_checkin", desc:"Check in to a study session", type:"checkin", target:1, reward:{type:"SLP",amount:15}},
+    {id:"q_upvote", desc:"Upvote 2 helpful replies", type:"upvotesGiven", target:2, reward:{type:"CP",amount:10}}
+  ];
+  const shuffled = pool.slice().sort(()=>Math.random()-0.5);
+  return shuffled.slice(0,3).map(q=>({...q, progress:0, completed:false}));
+}
+
+/* ---------- STATE LOAD / SAVE ---------- */
+let STATE = loadState();
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return defaultState();
+}
+function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE)); }
+
+function curUser(){ return STATE.users[STATE.currentUser]; }
+
+/* ===========================================================
+   LEVEL SYSTEM
+   XP = Study Points + Contribution Points + Social Learning
+   Points + Login Points (spec section J). Thresholds given
+   for levels 1–5; we extrapolate +350 XP per level afterward.
+=========================================================== */
+function levelThreshold(level){
+  const base=[0,100,250,500,800];
+  if(level<=5) return base[level-1];
+  return 800 + (level-5)*350;
+}
+function levelForXP(xp){
+  let lvl=1;
+  while(levelThreshold(lvl+1)<=xp){lvl++;}
+  return lvl;
+}
+function checkLevelUp(user){
+  const newLevel = levelForXP(user.xp);
+  if(newLevel>user.level){
+    for(let l=user.level+1; l<=newLevel; l++){
+      toast("Level Up!", `${user.name} reached Level ${l}.`);
+      if(l===5) toast("Feature Unlocked", "You can now add a personal motto to your profile.");
+      if(l===10){ user.isPrivateGroupsUnlocked=true; toast("Feature Unlocked", "Private invite-only study groups are now available.");}
+      if(l===15) toast("Feature Unlocked", "Expert Mode in the Help Hub: unanswered questions surface first.");
+    }
+    user.level=newLevel;
+  }
+}
+
+/* ===========================================================
+   CENTRAL POINT AWARD FUNCTION
+   Applies the Double-XP power-up multiplier and Exam Marathon
+   Mode multiplier (both stack, per spec section I/F), updates
+   XP, and re-checks level thresholds.
+=========================================================== */
+function award(user, type, amount){
+  let mult=1;
+  if(user.doubleXPUntil && Date.now()<user.doubleXPUntil) mult*=2;
+  if(STATE.examMarathon) mult*=2;
+  const final = Math.round(amount*mult);
+  if(type==="GEMS"){ user.gems+=final; }
+  else{
+    user[type.toLowerCase()] += final;
+    user.xp += final;
+    checkLevelUp(user);
+  }
+  return final;
+}
+
+/* ===========================================================
+   BADGE SYSTEM — 3 tiers (Bronze=1, Silver=2, Gold=3).
+   awardBadgeTier only upgrades a badge, never downgrades it.
+=========================================================== */
+const BADGE_META = {
+  helper:{label:"Helper", thresholds:[5,20,50], metric:"helpfulMarksReceived"},
+  community_approved:{label:"Community Approved", thresholds:[1,5,15]},
+  top_helper:{label:"Top Helper", thresholds:[1]},
+  goal_crusher:{label:"Goal Crusher", thresholds:[1]},
+  campus_scholar:{label:"Campus Scholar", thresholds:[1]},
+  thought_provoker:{label:"Thought Provoker", thresholds:[1]},
+  study_buddy:{label:"Study Buddy", thresholds:[1]},
+  squad_streak:{label:"Squad Streak", thresholds:[1]},
+  early_bird:{label:"Early Bird", thresholds:[1]},
+  explorer:{label:"Explorer", thresholds:[1]},
+  peaceful_scholar:{label:"Peaceful Scholar", thresholds:[1]},
+  pledge_keeper:{label:"Pledge Keeper", thresholds:[1]},
+  rivalry_winner:{label:"Rivalry Winner", thresholds:[1]}
+};
+function awardBadgeTier(user, key, tier, opts={}){
+  const cur = user.badges[key]||0;
+  if(tier>cur){
+    user.badges[key]=tier;
+    const meta=BADGE_META[key];
+    const tierName = tier===1?"Bronze":tier===2?"Silver":"Gold";
+    toast("Badge Unlocked", `${meta?meta.label:key} — ${tierName}${opts.subject?" ("+opts.subject+")":""}`);
+    if(tier===3){ award(user,"GEMS",10); toast("Gems Earned","+10 gems for a Gold-tier badge."); }
+  }
+}
+
+/* ===========================================================
+   STUDY TIMER (section A)
+   Each completed 30-minute block = 20 SP. A full 60-minute
+   block (two consecutive completed blocks counted together)
+   adds a +10 SP bonus on top of the 2×20. Daily goal, streaks
+   and the heatmap are all driven off accumulated seconds.
+=========================================================== */
+let timerInterval=null;
+let timerSeconds=0;
+let timerRunning=false;
+let blocksAwardedThisRun=0;
+
+function timerLocation(){ return document.getElementById('timerLocation')?.value || LOCATIONS[0]; }
+
+function startTimer(){
+  if(timerRunning) return;
+  timerRunning=true;
+  timerInterval=setInterval(()=>{
+    timerSeconds++;
+    // every 1800s (30 min) completed -> award a study block
+    if(timerSeconds % 1800 === 0){
+      awardStudyBlock();
+    }
+    renderTimerDisplay();
+  },1000);
+  renderTab();
+}
+function pauseTimer(){
+  timerRunning=false;
+  clearInterval(timerInterval);
+  renderTab();
+}
+function resetTimer(){
+  pauseTimer();
+  timerSeconds=0;
+  blocksAwardedThisRun=0;
+  renderTab();
+}
+function awardStudyBlock(){
+  const user = curUser();
+  const loc = timerLocation();
+  let sp = 20;
+  blocksAwardedThisRun++;
+  // full hour bonus: every 2nd block in this run
+  let bonusMsg="";
+  if(blocksAwardedThisRun % 2 === 0){
+    sp += 10;
+    bonusMsg=" (+10 full-hour bonus)";
+  }
+  // Lucky Location: double SP for this session
+  const luckyDoubled = (loc===STATE.luckyLocation.location);
+  let finalAmount = sp;
+  if(luckyDoubled) finalAmount*=2;
+  const granted = award(user,"SP",finalAmount);
+  toast("Study Points Earned", `+${granted} SP at ${loc}${bonusMsg}${luckyDoubled?" — Lucky Location ×2!":""}`);
+
+  // heatmap minutes
+  const today = todayStr();
+  user.heatmap[today] = (user.heatmap[today]||0) + 30;
+
+  // locations studied (Explorer badge)
+  user.locationsStudied[loc]=true;
+  const distinctCount = Object.keys(user.locationsStudied).length;
+  if(distinctCount>=5) awardBadgeTier(user,"explorer",1);
+
+  // quiet location tracking (Peaceful Scholar)
+  const occ = STATE.occupancy.map[loc];
+  if(occ==="green"){
+    user.quietSessionCount=(user.quietSessionCount||0)+1;
+    if(user.quietSessionCount>=3) awardBadgeTier(user,"peaceful_scholar",1);
+  }
+
+  // daily quest progress: studyMinutes
+  bumpQuestProgress("studyMinutes",30);
+
+  // daily goal check
+  checkDailyGoal(user);
+  // streak check (at least 1h/day)
+  checkStreak(user);
+  save();
+  renderAll();
+}
+function checkDailyGoal(user){
+  const goalHours = parseFloat(document.getElementById('dailyGoalInput')?.value || localStorage.getItem('dg_'+STATE.currentUser) || 2);
+  const today = todayStr();
+  const minutesToday = user.heatmap[today]||0;
+  if(minutesToday >= goalHours*60 && user.goalCrusherDate!==today){
+    user.goalCrusherDate=today;
+    award(user,"XP_RAW",0); // no-op placeholder
+    user.xp+=50; checkLevelUp(user);
+    toast("Goal Crusher!", "+50 XP for hitting today's study goal.");
+    awardBadgeTier(user,"goal_crusher",1);
+  }
+}
+function checkStreak(user){
+  const today = todayStr();
+  const minutesToday = user.heatmap[today]||0;
+  if(minutesToday>=60 && user.lastStudyDate!==today){
+    const y = yesterdayStr();
+    if(user.lastStudyDate===y || user.streak===0){
+      user.streak = (user.lastStudyDate===y) ? user.streak+1 : 1;
+    } else if(user.streakFreeze){
+      user.streakFreeze=false;
+      user.streak+=1;
+      toast("Streak Freeze Used", "Your streak was protected from a missed day.");
+    } else {
+      user.streak=1;
+    }
+    user.lastStudyDate=today;
+    if(user.streak%7===0){
+      award(user,"GEMS",5);
+      toast("Streak Milestone", `+5 gems for a ${user.streak}-day streak.`);
+    }
+    if(user.streak>=7) awardBadgeTier(user,"campus_scholar",1);
+  }
+}
+function renderTimerDisplay(){
+  const el=document.getElementById('timerDisplay');
+  if(!el) return;
+  const h=Math.floor(timerSeconds/3600), m=Math.floor((timerSeconds%3600)/60), s=timerSeconds%60;
+  el.textContent = [h,m,s].map(v=>String(v).padStart(2,'0')).join(':');
+  const remaining = 1800-(timerSeconds%1800);
+  const pct = ((1800-remaining)/1800)*100;
+  const fill=document.getElementById('blockProgressFill');
+  if(fill) fill.style.width=pct+"%";
+}
+
+/* ===========================================================
+   DAILY QUESTS (section E)
+   Progress is bumped by gameplay events across the app. When
+   all three are completed, a Mystery Chest becomes openable,
+   rolling a virtual die for one of three reward types.
+=========================================================== */
+function ensureDailyRollover(){
+  const today=todayStr();
+  if(STATE.dailyQuests.date!==today){
+    STATE.dailyQuests={date:today, list:rollDailyQuests(), chestOpened:false};
+  }
+  if(STATE.luckyLocation.date!==today){
+    STATE.luckyLocation={date:today, location:pick(LOCATIONS)};
+    toast("New Lucky Location", `${STATE.luckyLocation.location} gives double SP today!`);
+  }
+  if(STATE.occupancy.date!==today){
+    STATE.occupancy={date:today, map:rollOccupancy(today)};
+  }
+  // weekly leaderboard rollover
+  const wk = weekKey(new Date());
+  if(STATE.weeklyLeaderboardWeek!==wk){
+    STATE.weeklyLeaderboardWeek=wk;
+    Object.values(STATE.users).forEach(u=>u._weeklySPStart=u.sp);
+  }
+}
+function bumpQuestProgress(type, amount){
+  const list = STATE.dailyQuests.list;
+  let changed=false;
+  list.forEach(q=>{
+    if(q.type===type && !q.completed){
+      q.progress = Math.min(q.target, q.progress+amount);
+      if(q.progress>=q.target){
+        q.completed=true;
+        const user=curUser();
+        award(user, q.reward.type, q.reward.amount);
+        toast("Quest Complete", `${q.desc} — +${q.reward.amount} ${q.reward.type}`);
+      }
+      changed=true;
+    }
+  });
+  if(changed) save();
+}
+function openChest(){
+  if(STATE.dailyQuests.chestOpened) return;
+  const chestEl = document.getElementById('chestIcon');
+  chestEl.classList.add('shake');
+  setTimeout(()=>{
+    chestEl.classList.remove('shake');
+    chestEl.classList.add('open');
+    const user=curUser();
+    const roll=Math.random();
+    let msg;
+    if(roll<0.4){
+      const xpAmt=50+Math.floor(Math.random()*51);
+      user.xp+=xpAmt; checkLevelUp(user);
+      msg=`+${xpAmt} bonus XP!`;
+    } else if(roll<0.75){
+      award(user,"GEMS",20);
+      msg="+20 Gems!";
+    } else {
+      awardBadgeTier(user,"goal_crusher",Math.min(3,(user.badges.goal_crusher||0)+1));
+      msg="A rare badge tier upgrade!";
+    }
+    STATE.dailyQuests.chestOpened=true;
+    toast("Mystery Chest", msg);
+    save();
+    renderAll();
+  },650);
+}
+
+/* ===========================================================
+   HELP HUB (section B)
+=========================================================== */
+let activeSubject = SUBJECTS[0];
+function setActiveSubject(s){ activeSubject=s; renderTab(); }
+function postQuestion(){
+  const text=document.getElementById('newQText').value.trim();
+  if(!text) return;
+  const fileTag = document.getElementById('newQFile').checked ? " 📎 dummy_upload.pdf attached" : "";
+  STATE.questions.unshift({
+    id:"q"+Date.now(), subject:activeSubject, author:STATE.currentUser,
+    text:text+fileTag, time:Date.now(), insightfulBy:[], replies:[]
+  });
+  save(); renderTab();
+}
+function postReply(qid){
+  const ta = document.getElementById('reply_'+qid);
+  const text = ta.value.trim();
+  if(!text) return;
+  const user = curUser();
+  const q = STATE.questions.find(q=>q.id===qid);
+  q.replies.push({id:"r"+Date.now(), author:STATE.currentUser, text, upvotes:0, upvoters:[], helpful:false, time:Date.now()});
+  // base contribution points; Subject Week gives +50% CP in that subject
+  let cp=5;
+  if(STATE.subjectWeek===q.subject) cp=Math.round(cp*1.5);
+  const granted = award(user,"CP",cp);
+  user.subjectCP[q.subject]=(user.subjectCP[q.subject]||0)+granted;
+  toast("Contribution Points Earned", `+${granted} CP for replying in ${q.subject}`);
+  checkSubjectMastery(user, q.subject);
+  bumpQuestProgress("answers",1);
+  save(); renderTab();
+}
+function markHelpful(qid, rid){
+  const q=STATE.questions.find(q=>q.id===qid);
+  const r=q.replies.find(r=>r.id===rid);
+  if(r.helpful) return;
+  r.helpful=true;
+  const author=STATE.users[r.author];
+  if(author){
+    const granted=award(author,"CP",20);
+    toast("Helpful Bonus", `${author.name} earned +${granted} CP and a Verified Helper tag.`);
+    bumpHelperBadge(author);
+  }
+  save(); renderTab();
+}
+function upvoteReply(qid, rid){
+  const q=STATE.questions.find(q=>q.id===qid);
+  const r=q.replies.find(r=>r.id===rid);
+  if(r.upvoters.includes(STATE.currentUser)) return; // one upvote per viewer
+  r.upvoters.push(STATE.currentUser);
+  r.upvotes++;
+  bumpQuestProgress("upvotesGiven",1);
+  if(r.upvotes>0 && r.upvotes%5===0){
+    const author=STATE.users[r.author];
+    if(author){
+      const granted=award(author,"CP",10);
+      author.subjectUpvotes[q.subject]=(author.subjectUpvotes[q.subject]||0)+r.upvotes;
+      r._communityApproved=true;
+      toast("Community Approved", `${author.name}'s reply hit ${r.upvotes} upvotes — +${granted} CP`);
+      checkSubjectMastery(author, q.subject);
+    }
+  }
+  save(); renderTab();
+}
+function markInsightful(qid){
+  const q=STATE.questions.find(q=>q.id===qid);
+  if(!q.insightfulBy.includes(STATE.currentUser)) q.insightfulBy.push(STATE.currentUser);
+  evaluateThoughtProvoker(q);
+  save(); renderTab();
+}
+function evaluateThoughtProvoker(q){
+  if(q.replies.length>10 || q.insightfulBy.length>=3){
+    const asker=STATE.users[q.author];
+    if(asker) awardBadgeTier(asker,"thought_provoker",1);
+  }
+}
+function bumpHelperBadge(user){
+  const helpfulCount = countHelpfulMarks(user);
+  const t=BADGE_META.helper.thresholds;
+  let tier=0;
+  t.forEach((th,i)=>{ if(helpfulCount>=th) tier=i+1; });
+  if(tier>0) awardBadgeTier(user,"helper",tier);
+}
+function countHelpfulMarks(user){
+  let c=0;
+  STATE.questions.forEach(q=>q.replies.forEach(r=>{ if(r.author===userKeyOf(user) && r.helpful) c++; }));
+  return c;
+}
+function userKeyOf(user){ return Object.keys(STATE.users).find(k=>STATE.users[k]===user); }
+function checkSubjectMastery(user, subject){
+  if(user.subjectCP[subject]>100) awardBadgeTier(user,"top_helper",1,{subject});
+}
+function masteryLevel(cp, upvotes){
+  const rep=(cp||0)+(upvotes||0);
+  if(rep>=300) return "Guru";
+  if(rep>=150) return "Expert";
+  if(rep>=50) return "Apprentice";
+  return "Novice";
+}
+function unlockPin(subject){
+  alert(`Unlocked! You can now pin top threads in ${subject}.`);
+}
+
+/* ===========================================================
+   STUDY SESSION SCHEDULER (section C)
+=========================================================== */
+function createSession(){
+  const subject=document.getElementById('sessSubject').value;
+  const size=parseInt(document.getElementById('sessSize').value,10);
+  const loc=document.getElementById('sessLoc').value;
+  const time=document.getElementById('sessTime').value;
+  if(!time) { alert("Pick a date & time."); return; }
+  const dur=document.getElementById('sessDur').value;
+  STATE.sessions.unshift({
+    id:"s"+Date.now(), subject, size, location:loc, time, duration:dur,
+    organizer:STATE.currentUser, attendees:[STATE.currentUser], status:"open",
+    checkedIn:[]
+  });
+  if(size===3) bumpQuestProgress("sessionCreated3",1);
+  toast("Session Created", `${subject} session at ${loc} is now open for joiners.`);
+  save(); renderTab();
+}
+function joinSession(id){
+  const s=STATE.sessions.find(s=>s.id===id);
+  if(s.attendees.includes(STATE.currentUser)) return;
+  if(s.attendees.length>=s.size) return;
+  s.attendees.push(STATE.currentUser);
+  if(s.attendees.length>=s.size){ s.status="confirmed"; toast("Session Confirmed", `${s.subject} session is full and confirmed!`); }
+  save(); renderTab();
+}
+function checkInSession(id){
+  const s=STATE.sessions.find(s=>s.id===id);
+  if(s.checkedIn.includes(STATE.currentUser)) return;
+  s.checkedIn.push(STATE.currentUser);
+  const user=curUser();
+  let slp=30;
+  const granted=award(user,"SLP",slp);
+  toast("Social Learning Points", `+${granted} SLP for checking in to ${s.subject}`);
+  if(s.organizer===STATE.currentUser){
+    const bonus=award(user,"SLP",10);
+    toast("Initiator Bonus", `+${bonus} SLP for organizing this session`);
+  }
+  user.sessionsAttended=(user.sessionsAttended||0)+1;
+  if(user.sessionsAttended>=5) awardBadgeTier(user,"study_buddy",1);
+  user.locationSessionCount[s.location]=(user.locationSessionCount[s.location]||0)+1;
+  bumpQuestProgress("checkin",1);
+
+  // squad streak: when 2+ attendees have checked into this session,
+  // increment the pair counter for every pair now checked in together.
+  if(s.checkedIn.length>=2){
+    for(let i=0;i<s.checkedIn.length;i++){
+      for(let j=i+1;j<s.checkedIn.length;j++){
+        const key=[s.checkedIn[i],s.checkedIn[j]].sort().join("|");
+        STATE.sessionPairCounts[key]=(STATE.sessionPairCounts[key]||0)+1;
+        if(STATE.sessionPairCounts[key]>=3){
+          const [a,b]=key.split("|");
+          if(STATE.users[a]) awardBadgeTier(STATE.users[a],"squad_streak",1);
+          if(STATE.users[b]) awardBadgeTier(STATE.users[b],"squad_streak",1);
+        }
+      }
+    }
+  }
+  save(); renderTab();
+}
+
+/* ===========================================================
+   LOGIN / DAILY CHECK-IN BONUSES (section D)
+=========================================================== */
+function processLogin(userKey){
+  const user=STATE.users[userKey];
+  const today=todayStr();
+  if(user.lastLogin===today) return;
+  const y=yesterdayStr();
+  user.loginStreak = (user.lastLogin===y) ? user.loginStreak+1 : 1;
+  user.lastLogin=today;
+  let lp=5;
+  let msg=`+5 Login Points`;
+  const hour=new Date().getHours();
+  if(hour<9){
+    lp+=5;
+    awardBadgeTier(user,"early_bird",1);
+    msg+=` (+5 Early Bird bonus)`;
+  }
+  const granted=award(user,"LP",lp);
+  toast("Daily Login Bonus", `${user.name}: ${msg} — total +${granted} LP`);
+  if(user.loginStreak===7){
+    toast("Golden Frame Unlocked", `${user.name} hit a 7-day login streak!`);
+  }
+  save();
+}
+
+/* ===========================================================
+   SHOP & VIRTUAL ECONOMY (section F)
+=========================================================== */
+function buyItem(kind, cost, payload){
+  const user=curUser();
+  if(user.gems<cost){ toast("Not Enough Gems", "Earn more gems from quests and streaks."); return; }
+  user.gems-=cost;
+  if(kind==="accessory") user.avatarAccessory=payload;
+  if(kind==="banner") user.bannerColor=payload;
+  if(kind==="doublexp"){ user.doubleXPUntil=Date.now()+60*60*1000; toast("Double XP Active", "All point gains are 2× for the next hour."); }
+  if(kind==="freeze"){ user.streakFreeze=true; toast("Streak Freeze Ready", "Your next missed day won't break your streak."); }
+  save(); renderAll();
+}
+
+/* ===========================================================
+   SOCIAL / COMPETITION (section G)
+=========================================================== */
+function addFriend(){
+  const name=document.getElementById('friendName').value.trim();
+  if(!name) return;
+  const user=curUser();
+  user.friends.push({
+    name, weeklyHours:(Math.random()*10).toFixed(1), streak:Math.floor(Math.random()*8),
+    badgeCount:Math.floor(Math.random()*5)
+  });
+  document.getElementById('friendName').value="";
+  save(); renderTab();
+}
+function startRivalry(idx){
+  const user=curUser();
+  const friend=user.friends[idx];
+  const friendSP = user.sp + (Math.random()-0.5)*200;
+  const win = user.sp >= friendSP;
+  if(win){ awardBadgeTier(user,"rivalry_winner",1); toast("Rivalry Resolved", `You beat ${friend.name} in the 7-day study race!`); }
+  else toast("Rivalry Resolved", `${friend.name} edged you out this time — challenge again!`);
+  save(); renderTab();
+}
+function setPledge(){
+  const goal=parseFloat(document.getElementById('pledgeGoal').value);
+  if(!goal) return;
+  curUser().pledge={goal, weekStart:weekKey(new Date()), achieved:false};
+  save(); renderTab();
+}
+function cheerPledge(){
+  const user=curUser();
+  const today=todayStr();
+  if(user.cheerDate!==today){ user.cheerDate=today; user.cheersToday=0; }
+  if(user.cheersToday>=5) return;
+  user.cheersToday++;
+  award(user,"SP",1);
+  toast("Cheer Received", "+1 SP from a cheering friend.");
+  checkPledgeAchieved(user);
+  save(); renderTab();
+}
+function weeklyStudyMinutes(user){
+  const wk=weekKey(new Date());
+  let total=0;
+  Object.entries(user.heatmap).forEach(([date,min])=>{
+    if(weekKey(new Date(date))===wk) total+=min;
+  });
+  return total;
+}
+function checkPledgeAchieved(user){
+  if(!user.pledge || user.pledge.achieved) return;
+  if(weeklyStudyMinutes(user)/60 >= user.pledge.goal){
+    user.pledge.achieved=true;
+    awardBadgeTier(user,"pledge_keeper",1);
+  }
+}
+
+/* ===========================================================
+   EXAM MARATHON / SUBJECT WEEK (section I)
+=========================================================== */
+function toggleMarathon(checked){
+  STATE.examMarathon=checked;
+  toast(checked?"Exam Marathon Mode ON":"Exam Marathon Mode OFF", checked?"All point earnings are now doubled.":"Point earnings are back to normal.");
+  save(); renderAll();
+}
+function setSubjectWeek(subj){
+  STATE.subjectWeek = subj || null;
+  if(subj) toast("Subject Week Set", `${subj} replies now earn +50% CP this week.`);
+  save(); renderTab();
+}
+
+/* ===========================================================
+   TOASTS & NOTIFICATION CENTRE (section K)
+=========================================================== */
+function toast(title, msg){
+  STATE.notifications.unshift({title, msg, time:Date.now()});
+  STATE.notifications = STATE.notifications.slice(0,30);
+  const host=document.getElementById('toastHost');
+  const el=document.createElement('div');
+  el.className='toast';
+  el.innerHTML=`<div class="tt">${title}</div><div>${msg}</div>`;
+  host.appendChild(el);
+  setTimeout(()=>{ el.classList.add('fade'); setTimeout(()=>el.remove(),400); }, 3600);
+  const dot=document.getElementById('bellDot');
+  if(dot) dot.style.display='block';
+  renderNotifPanel();
+}
+function toggleNotifPanel(){
+  const p=document.getElementById('notifPanel');
+  p.classList.toggle('open');
+  document.getElementById('bellDot').style.display='none';
+}
+function renderNotifPanel(){
+  const p=document.getElementById('notifPanel');
+  if(!p) return;
+  if(STATE.notifications.length===0){
+    p.innerHTML=`<div class="notif-item muted">No notifications yet.</div>`;
+    return;
+  }
+  p.innerHTML = STATE.notifications.map(n=>`
+    <div class="notif-item">
+      <div><strong>${n.title}</strong></div>
+      <div>${n.msg}</div>
+      <div class="t">${new Date(n.time).toLocaleTimeString()}</div>
+    </div>`).join("");
+}
+
+/* ===========================================================
+   USER SWITCHING
+=========================================================== */
+function switchUser(key){
+  STATE.currentUser=key;
+  save();
+  processLogin(key);
+  renderAll();
+}
+
+/* ===========================================================
+   RENDERING
+=========================================================== */
+const TABS = [
+  {id:"timer", label:"Study Timer"},
+  {id:"helphub", label:"Help Hub"},
+  {id:"sessions", label:"Sessions"},
+  {id:"quests", label:"Quests"},
+  {id:"shop", label:"Shop"},
+  {id:"map", label:"Campus Map"},
+  {id:"social", label:"Social"},
+  {id:"leaderboard", label:"Leaderboard"},
+  {id:"profile", label:"Profile"}
+];
+let activeTab="timer";
+function setTab(id){ activeTab=id; renderTab(); }
+
+function renderHeader(){
+  const sel=document.getElementById('userSwitcher');
+  sel.innerHTML = Object.keys(STATE.users).map(k=>`<option value="${k}" ${k===STATE.currentUser?'selected':''}>${STATE.users[k].name}</option>`).join("");
+  const user=curUser();
+  document.getElementById('levelPill').textContent = "LV "+user.level;
+  const flag=document.getElementById('xp2xFlag');
+  flag.style.display = (user.doubleXPUntil && Date.now()<user.doubleXPUntil) ? 'inline-block' : 'none';
+  document.getElementById('statStrip').innerHTML = `
+    <div class="stat-chip"><span class="v">${user.xp}</span><span class="k">Total XP</span></div>
+    <div class="stat-chip"><span class="v">${user.sp}</span><span class="k">Study Pts</span></div>
+    <div class="stat-chip"><span class="v">${user.cp}</span><span class="k">Contrib. Pts</span></div>
+    <div class="stat-chip"><span class="v">${user.slp}</span><span class="k">Social Pts</span></div>
+    <div class="stat-chip"><span class="v">${user.gems} 💎</span><span class="k">Gems</span></div>
+    <div class="stat-chip"><span class="v">${user.streak} 🔥</span><span class="k">Streak</span></div>
+  `;
+  renderNotifPanel();
+}
+
+function renderTabBar(){
+  document.getElementById('tabBar').innerHTML = TABS.map(t=>
+    `<button class="tab ${t.id===activeTab?'active':''}" onclick="setTab('${t.id}')">${t.label}</button>`
+  ).join("");
+}
+
+function badgeHTML(key, tier){
+  const meta=BADGE_META[key]||{label:key};
+  const tierClass = tier>=3?"t3":tier===2?"t2":"t1";
+  const tierName = tier>=3?"Gold":tier===2?"Silver":"Bronze";
+  return `<div class="medal"><div class="disc ${tierClass}">🏅</div><div class="label">${meta.label}<br><span class="tier-tag">${tierName}</span></div></div>`;
+}
+
+function renderAll(){
+  ensureDailyRollover();
+  renderHeader();
+  renderTabBar();
+  renderTab();
+  save();
+}
+
+function renderTab(){
+  const root=document.getElementById('tabContent');
+  const user=curUser();
+  let html="";
+  if(STATE.examMarathon){
+    html += `<div class="marathon-banner show">⚡ Exam Marathon Mode is active — all point earnings are doubled, and the leaderboard below is acting as the event leaderboard.</div>`;
+  }
+
+  if(activeTab==="timer"){
+    const today=todayStr();
+    const minutesToday=user.heatmap[today]||0;
+    const goalHours = localStorage.getItem('dg_'+STATE.currentUser) || 2;
+    const lucky = STATE.luckyLocation.location;
+    html += `
+    <div class="grid2">
+      <div class="card">
+        <h2>Campus Study Timer</h2>
+        <p class="hint">Pick a location, start the clock. Every completed 30-minute block earns Study Points automatically.</p>
+        <select id="timerLocation" style="width:100%;margin-bottom:12px;" class="${timerLocation()===lucky?'timer-loc-glow':''}" onchange="renderTab()">
+          ${LOCATIONS.map(l=>`<option value="${l}" ${l===timerLocation()?'selected':''}>${l}${l===lucky?' ✨ Lucky':''}</option>`).join("")}
+        </select>
+        <div class="timer-display mono" id="timerDisplay">00:00:00</div>
+        <div class="progress-track"><div class="progress-fill" id="blockProgressFill" style="width:0%"></div></div>
+        <p class="muted" style="text-align:center;margin-top:8px;font-size:12px;">Next 30-min block reward at the bar's end</p>
+        <div class="timer-controls">
+          <button class="primary" onclick="startTimer()" ${timerRunning?'disabled':''}>▶ Start</button>
+          <button class="outline" onclick="pauseTimer()" ${!timerRunning?'disabled':''}>⏸ Pause</button>
+          <button class="ghost" onclick="resetTimer()">↺ Reset</button>
+        </div>
+        <hr class="rule">
+        <div class="daily-goal-row">
+          <label class="mono" style="font-size:12.5px;">Daily goal (hrs):</label>
+          <input id="dailyGoalInput" type="number" min="0.5" step="0.5" value="${goalHours}" style="width:70px;" onchange="localStorage.setItem('dg_${STATE.currentUser}', this.value)">
+          <span class="muted mono">${(minutesToday/60).toFixed(1)}h / ${goalHours}h today</span>
+        </div>
+        <div class="progress-track" style="margin-top:8px;"><div class="progress-fill" style="width:${Math.min(100,(minutesToday/(goalHours*60))*100)}%"></div></div>
+      </div>
+      <div class="card">
+        <h2>Study Heatmap</h2>
+        <p class="hint">Last 28 days of study minutes, GitHub-style.</p>
+        ${renderHeatmap(user)}
+        <hr class="rule">
+        <h2 style="font-size:15px;">Badges in progress</h2>
+        <div class="badge-row">${renderBadgeRow(user)}</div>
+      </div>
+    </div>`;
+  }
+
+  if(activeTab==="helphub"){
+    html += `
+    <div class="pillbar">${SUBJECTS.map(s=>`<button class="pill ${s===activeSubject?'active':''}" onclick="setActiveSubject('${s}')">${s}</button>`).join("")}</div>
+    <div class="grid2">
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <h2>Ask in ${activeSubject}</h2>
+          <textarea id="newQText" rows="3" style="width:100%;" placeholder="Describe your problem..."></textarea>
+          <div class="flexrow" style="margin-top:10px;">
+            <label class="checkbox-row"><input type="checkbox" id="newQFile"> Attach file (simulated)</label>
+            <button class="primary" onclick="postQuestion()">Post Question</button>
+          </div>
+        </div>
+        ${STATE.questions.filter(q=>q.subject===activeSubject).map(q=>renderQuestion(q)).join("") || `<p class="muted">No questions yet in ${activeSubject} — be the first to ask.</p>`}
+      </div>
+      <div class="card">
+        <h2>Subject Mastery</h2>
+        <p class="hint">${activeSubject} reputation = Contribution Points + upvotes received.</p>
+        ${renderMastery(user)}
+      </div>
+    </div>`;
+  }
+
+  if(activeTab==="sessions"){
+    html += `
+    <div class="grid2">
+      <div class="card">
+        <h2>Create a Study Session</h2>
+        <div class="flexrow" style="margin-bottom:10px;">
+          <select id="sessSubject">${SUBJECTS.map(s=>`<option>${s}</option>`).join("")}</select>
+          <select id="sessSize">${[2,3,4].map(n=>`<option value="${n}">${n} people</option>`).join("")}</select>
+        </div>
+        <div class="flexrow" style="margin-bottom:10px;">
+          <select id="sessLoc">${LOCATIONS.map(l=>`<option>${l}</option>`).join("")}</select>
+          <input type="number" id="sessDur" value="60" min="15" step="15" style="width:90px;" title="Duration (min)">
+        </div>
+        <input type="datetime-local" id="sessTime" style="width:100%;margin-bottom:12px;">
+        <button class="primary" onclick="createSession()">Open Session</button>
+      </div>
+      <div class="card">
+        <h2>Open Sessions</h2>
+        ${STATE.sessions.length ? STATE.sessions.map(renderSession).join("") : `<p class="muted">No sessions yet — create one to get started.</p>`}
+      </div>
+    </div>`;
+  }
+
+  if(activeTab==="quests"){
+    const dq=STATE.dailyQuests;
+    const allDone = dq.list.every(q=>q.completed);
+    html += `
+    <div class="card" style="margin-bottom:16px;">
+      <h2>Today's Quests</h2>
+      <p class="hint">Resets every 24 hours. Complete all three to unlock the Mystery Chest.</p>
+      ${dq.list.map(q=>`
+        <div class="quest-card ${q.completed?'done':''}">
+          <div class="flexrow" style="justify-content:space-between;">
+            <strong>${q.desc}</strong>
+            <span class="mono muted">${q.progress}/${q.target}</span>
+          </div>
+          <div class="progress-track" style="margin-top:10px;"><div class="progress-fill" style="width:${(q.progress/q.target)*100}%"></div></div>
+          <div class="muted" style="margin-top:8px;font-size:11.5px;">Reward: +${q.reward.amount} ${q.reward.type}${q.completed?' ✓':''}</div>
+        </div>`).join("")}
+    </div>
+    <div class="card chest-wrap">
+      <h2>Mystery Chest</h2>
+      <p class="hint">${allDone ? (dq.chestOpened?"Already opened today — come back tomorrow.":"All quests complete! Open the chest.") : "Complete all 3 quests above to unlock."}</p>
+      <div id="chestIcon" class="chest">${dq.chestOpened?'🧰':'🎁'}</div>
+      <div style="margin-top:16px;">
+        <button class="gold" onclick="openChest()" ${(!allDone||dq.chestOpened)?'disabled':''}>Open Chest</button>
+      </div>
+    </div>`;
+  }
+
+  if(activeTab==="shop"){
+    html += `
+    <div class="grid3">
+      <div class="card" style="grid-column:1/-1;">
+        <h2>Shop — you have <span class="gem-cost mono">${user.gems} 💎</span></h2>
+        <p class="hint">Spend gems on cosmetics and power-ups.</p>
+      </div>
+    </div>
+    <div class="shop-grid" style="margin-top:16px;">
+      ${["🎩 Top Hat","👓 Glasses","🐱 Pet Cat"].map((item,i)=>`
+        <div class="shop-item">
+          <div style="font-size:32px;">${item.split(' ')[0]}</div>
+          <strong>${item.slice(2)}</strong>
+          <span class="gem-cost mono">5 💎</span>
+          <button class="outline" onclick="buyItem('accessory',5,'${item.split(' ')[0]}')">${user.avatarAccessory===item.split(' ')[0]?'Equipped ✓':'Buy & Equip'}</button>
+        </div>`).join("")}
+      ${[["Navy Banner","#16243f"],["Gold Banner","#c9a227"],["Brick Banner","#b5482d"]].map(([name,color])=>`
+        <div class="shop-item">
+          <div style="height:28px;border-radius:6px;background:${color};box-shadow:0 2px 4px rgba(0,0,0,0.1);"></div>
+          <strong>${name}</strong>
+          <span class="gem-cost mono">5 💎</span>
+          <button class="outline" onclick="buyItem('banner',5,'${color}')">${user.bannerColor===color?'Equipped ✓':'Buy & Equip'}</button>
+        </div>`).join("")}
+      <div class="shop-item">
+        <div style="font-size:32px;">⚡</div>
+        <strong>Double XP — 1 hour</strong>
+        <p class="muted" style="margin:0;font-size:12px;">2× SP / CP / SLP for 60 minutes.</p>
+        <span class="gem-cost mono">15 💎</span>
+        <button class="gold" onclick="buyItem('doublexp',15)">Activate</button>
+      </div>
+      <div class="shop-item">
+        <div style="font-size:32px;">🧊</div>
+        <strong>Streak Freeze</strong>
+        <p class="muted" style="margin:0;font-size:12px;">Protects your streak through one missed day.</p>
+        <span class="gem-cost mono">10 💎</span>
+        <button class="gold" onclick="buyItem('freeze',10)" ${user.streakFreeze?'disabled':''}>${user.streakFreeze?'Ready ✓':'Buy'}</button>
+      </div>
+    </div>`;
+  }
+
+  if(activeTab==="map"){
+    html += `
+    <div class="card">
+      <h2>Campus Map</h2>
+      <p class="hint">✨ ${STATE.luckyLocation.location} is today's Lucky Location — double Study Points there. Occupancy refreshes daily.</p>
+      <div class="campus-map">
+        ${LOCATIONS.map(loc=>{
+          const occ=STATE.occupancy.map[loc];
+          const isLucky = loc===STATE.luckyLocation.location;
+          const occLabel = occ==="green"?"Quiet":occ==="yellow"?"Moderate":"Crowded";
+          return `<div class="loc-box ${isLucky?'lucky':''}" onclick="document.getElementById('timerLocation') && (document.getElementById('timerLocation').value='${loc}'); setTab('timer')">
+            <div style="font-size:28px;">${{Library:'📚','Study Hall':'🪑','Classroom A':'🏫','Student Center':'🏛️',Quad:'🌳',Lab:'🧪'}[loc]}</div>
+            <div style="font-weight:600;margin-top:6px;font-size:14px;">${loc}${isLucky?' ✨':''}</div>
+            <div class="occ occ-${occ}">${occLabel}</div>
+          </div>`;
+        }).join("")}
+      </div>
+      <hr class="rule">
+      <div class="section-title">Subject Week</div>
+      <div class="flexrow">
+        <select id="subjWeekSelect" onchange="setSubjectWeek(this.value)">
+          <option value="">None</option>
+          ${SUBJECTS.map(s=>`<option value="${s}" ${STATE.subjectWeek===s?'selected':''}>${s}</option>`).join("")}
+        </select>
+        <span class="muted">Replies in the chosen subject earn +50% CP this week.</span>
+      </div>
+      <hr class="rule">
+      <div class="section-title">Exam Marathon Mode</div>
+      <label class="checkbox-row"><input type="checkbox" ${STATE.examMarathon?'checked':''} onchange="toggleMarathon(this.checked)"> Activate — doubles all point earnings app-wide</label>
+    </div>`;
+  }
+
+  if(activeTab==="social"){
+    html += `
+    <div class="grid2">
+      <div class="card">
+        <h2>Friends</h2>
+        <div class="flexrow" style="margin-bottom:12px;">
+          <input id="friendName" placeholder="Add a friend by name">
+          <button class="primary" onclick="addFriend()">Add</button>
+        </div>
+        ${(user.friends.length? user.friends.map((f,i)=>`
+          <div class="session-card">
+            <div class="row">
+              <strong>${f.name}</strong>
+              <button class="outline" onclick="startRivalry(${i})">Challenge (7-day race)</button>
+            </div>
+            <div class="muted">Weekly hours: ${f.weeklyHours}h · Streak: ${f.streak}d · Badges: ${f.badgeCount}</div>
+          </div>`).join("") : `<p class="muted">No friends added yet.</p>`)}
+      </div>
+      <div class="card">
+        <h2>Pledge Wall</h2>
+        ${user.pledge ? `
+          <p>You pledged <strong>${user.pledge.goal}h</strong> this week. Progress: <span class="mono">${(weeklyStudyMinutes(user)/60).toFixed(1)}h</span> ${user.pledge.achieved?'— <strong style="color:var(--forest)">Achieved! 🎉</strong>':''}</p>
+        ` : `
+          <div class="flexrow">
+            <input id="pledgeGoal" type="number" placeholder="Hours this week" style="width:140px;">
+            <button class="primary" onclick="setPledge()">Pledge</button>
+          </div>
+        `}
+        <hr class="rule">
+        <p class="muted">Friends can cheer your pledge — each cheer gives +1 SP, up to 5 a day.</p>
+        <button class="outline" onclick="cheerPledge()">Simulate a Friend Cheer</button>
+        <p class="muted" style="margin-top:10px;">Cheers today: ${user.cheersToday||0}/5</p>
+      </div>
+    </div>`;
+  }
+
+  if(activeTab==="leaderboard"){
+    const ranked = Object.entries(STATE.users).sort((a,b)=>b[1].xp-a[1].xp);
+    const weekRanked = Object.entries(STATE.users).sort((a,b)=>(b[1].sp-(b[1]._weeklySPStart||0))-(a[1].sp-(a[1]._weeklySPStart||0)));
+    html += `
+    <div class="grid2">
+      <div class="card">
+        <h2>${STATE.examMarathon?'Event Leaderboard (Exam Marathon)':'Global Leaderboard'}</h2>
+        <p class="hint">Ranked by total XP. Resets monthly.</p>
+        ${ranked.map(([k,u],i)=>`
+          <div class="lb-row">
+            <span class="lb-rank ${i===0?'top':''} mono">#${i+1}</span>
+            <span class="lb-name">${u.name}${k===STATE.currentUser?' (you)':''}</span>
+            <span class="lb-xp">${u.xp} XP</span>
+          </div>`).join("")}
+        <button class="ghost" style="margin-top:12px;" onclick="resetMonthlyLeaderboard()">Simulate Monthly Reset</button>
+      </div>
+      <div class="card">
+        <h2>Weekly Leaderboard</h2>
+        <p class="hint">Study Points earned this week. Resets every Monday.</p>
+        ${weekRanked.map(([k,u],i)=>`
+          <div class="lb-row">
+            <span class="lb-rank ${i===0?'top':''} mono">#${i+1}</span>
+            <span class="lb-name">${u.name}${k===STATE.currentUser?' (you)':''}</span>
+            <span class="lb-xp">${(u.sp-(u._weeklySPStart||0))} SP</span>
+          </div>`).join("")}
+      </div>
+    </div>`;
+  }
+
+  if(activeTab==="profile"){
+    html += renderProfile(user);
+  }
+
+  root.innerHTML = html;
+
+  if(activeTab==="timer"){
+    renderTimerDisplay();
+    const tl=document.getElementById('timerLocation');
+    if(tl) tl.value = window._lastTimerLoc || tl.value;
+    tl?.addEventListener('change', e=>{ window._lastTimerLoc = e.target.value; });
+  }
+}
+
+function renderHeatmap(user){
+  const days=[];
+  for(let i=27;i>=0;i--){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    const key=todayStr(d);
+    const min=user.heatmap[key]||0;
+    const lv = min===0?0: min<30?1: min<60?2: min<120?3:4;
+    days.push(`<div class="heat-cell" data-lv="${lv}" title="${key}: ${min}m"></div>`);
+  }
+  return `<div class="heatmap">${days.join("")}</div><div class="heat-labels"><span>28 days ago</span><span>today</span></div>`;
+}
+
+function renderBadgeRow(user){
+  const earned = Object.entries(user.badges);
+  if(earned.length===0) return `<p class="muted">No badges yet — start a study session to earn your first.</p>`;
+  return earned.map(([k,t])=>badgeHTML(k,t)).join("");
+}
+
+function renderQuestion(q){
+  const askerName = STATE.users[q.author]?.name || q.author;
+  return `
+  <div class="question">
+    <div class="qmeta">Asked by ${askerName} · ${new Date(q.time).toLocaleString()} · ${q.insightfulBy.length} found insightful</div>
+    <div class="qtext">${escapeHtml(q.text)}</div>
+    ${q.author!==STATE.currentUser ? `<button class="ghost" onclick="markInsightful('${q.id}')">⭐ Insightful</button>` : ''}
+    ${q.replies.map(r=>renderReply(q,r)).join("")}
+    <div style="margin-top:12px;">
+      <textarea id="reply_${q.id}" rows="2" style="width:100%;" placeholder="Write a reply..."></textarea>
+      <button class="primary" style="margin-top:8px;" onclick="postReply('${q.id}')">Reply (+5 CP)</button>
+    </div>
+  </div>`;
+}
+function renderReply(q,r){
+  const name=STATE.users[r.author]?.name||r.author;
+  const canMarkHelpful = q.author===STATE.currentUser && !r.helpful;
+  return `
+  <div class="reply">
+    <div>${escapeHtml(r.text)}</div>
+    <div class="rmeta">
+      <span>${name}</span>
+      ${r.helpful?'<span class="tag verified">Verified Helper</span>':''}
+      ${r._communityApproved?'<span class="tag community">Community Approved</span>':''}
+      <button class="ghost" onclick="upvoteReply('${q.id}','${r.id}')">▲ ${r.upvotes}</button>
+      ${canMarkHelpful?`<button class="ghost" onclick="markHelpful('${q.id}','${r.id}')">Mark Helpful</button>`:''}
+    </div>
+  </div>`;
+}
+function renderMastery(user){
+  return SUBJECTS.map(s=>{
+    const cp=user.subjectCP[s]||0, up=user.subjectUpvotes[s]||0;
+    const lvl=masteryLevel(cp,up);
+    const rep=cp+up;
+    const pct=Math.min(100,(rep/300)*100);
+    return `
+    <div style="margin-bottom:16px;">
+      <div class="flexrow" style="justify-content:space-between;">
+        <strong>${s}</strong><span class="mono muted">${lvl}</span>
+      </div>
+      <div class="progress-track" style="margin-top:6px;"><div class="progress-fill" style="width:${pct}%"></div></div>
+      ${lvl==="Guru"?`<button class="ghost" onclick="unlockPin('${s}')">📌 Pin top threads</button>`:''}
+    </div>`;
+  }).join("");
+}
+function renderSession(s){
+  const filled=s.attendees.length;
+  const statusClass = s.status==="confirmed"?"status-confirmed": filled>=s.size?"status-full":"status-open";
+  const canCheckIn = s.attendees.includes(STATE.currentUser) && s.status==="confirmed" && new Date(s.time) <= new Date(Date.now()+1000*60*60*24*365);
+  const alreadyChecked = s.checkedIn.includes(STATE.currentUser);
+  return `
+  <div class="session-card">
+    <div class="row">
+      <strong>${s.subject}</strong>
+      <span class="status-pill ${statusClass}">${s.status}</span>
+    </div>
+    <div class="muted">${s.location} · ${s.time ? new Date(s.time).toLocaleString():''} · ${s.duration}min · organizer: ${STATE.users[s.organizer]?.name}</div>
+    <div class="slot-dots">${Array.from({length:s.size}).map((_,i)=>`<div class="slot-dot ${i<filled?'filled':''}"></div>`).join("")}</div>
+    <div class="flexrow" style="margin-top:10px;">
+      ${!s.attendees.includes(STATE.currentUser) && filled<s.size ? `<button class="outline" onclick="joinSession('${s.id}')">Join</button>` : ''}
+      ${s.status==="confirmed" && s.attendees.includes(STATE.currentUser) ? `<button class="gold" onclick="checkInSession('${s.id}')" ${alreadyChecked?'disabled':''}>${alreadyChecked?'Checked In ✓':'Check In'}</button>` : ''}
+    </div>
+  </div>`;
+}
+function renderProfile(user){
+  const banner = user.bannerColor ? `<div class="profile-banner" style="background:${user.bannerColor};">"${user.motto||'Building my study transcript, one block at a time.'}"</div>` : '';
+  return `
+  <div class="grid2">
+    <div class="card">
+      <div class="profile-head">
+        <div class="avatar-frame ${user.loginStreak>=7?'golden':''}">${user.avatarAccessory||'🎓'}</div>
+        <div>
+          <h2 style="margin:0;">${user.name}</h2>
+          <span class="muted">Level ${user.level} · ${user.loginStreak}-day login streak</span>
+        </div>
+      </div>
+      ${banner}
+      ${user.level>=5 ? `<div class="flexrow" style="margin-top:12px;"><input id="mottoInput" placeholder="Your motto" value="${user.motto||''}"><button class="outline" onclick="curUser().motto=document.getElementById('mottoInput').value; save(); renderTab();">Save</button></div>` : ''}
+      <div class="section-title">Badge Case</div>
+      <div class="badge-row">${renderBadgeRow(user)}</div>
+      ${user.isPrivateGroupsUnlocked ? `<label class="checkbox-row" style="margin-top:16px;"><input type="checkbox"> Make next study group private (invite-only)</label>` : ''}
+    </div>
+    <div class="transcript">
+      <h2 style="margin-top:0;">The Transcript</h2>
+      <div class="ledger-line"><span class="k">Study Points (SP)</span><span class="v">${user.sp}</span></div>
+      <div class="ledger-line"><span class="k">Contribution Points (CP)</span><span class="v">${user.cp}</span></div>
+      <div class="ledger-line"><span class="k">Social Learning Points (SLP)</span><span class="v">${user.slp}</span></div>
+      <div class="ledger-line"><span class="k">Login Points (LP)</span><span class="v">${user.lp}</span></div>
+      <div class="ledger-line total"><span class="k">Total XP</span><span class="v">${user.xp}</span></div>
+      <div class="spacer"></div>
+      <div class="ledger-line"><span class="k">Current Streak</span><span class="v">${user.streak} days</span></div>
+      <div class="ledger-line"><span class="k">Gems</span><span class="v">${user.gems} 💎</span></div>
+      <div class="ledger-line"><span class="k">Sessions Attended</span><span class="v">${user.sessionsAttended||0}</span></div>
+      <div class="ledger-line"><span class="k">Distinct Locations Studied</span><span class="v">${Object.keys(user.locationsStudied).length}</span></div>
+    </div>
+  </div>`;
+}
+function resetMonthlyLeaderboard(){
+  Object.values(STATE.users).forEach(u=>{ u.xp=0; u.level=1; });
+  toast("Monthly Reset", "The global leaderboard has been reset for a new month.");
+  save(); renderAll();
+}
+function escapeHtml(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+/* ---------- INIT ---------- */
+document.addEventListener('click', (e)=>{
+  const panel=document.getElementById('notifPanel');
+  const bell=document.getElementById('bellBtn');
+  if(panel && panel.classList.contains('open') && !panel.contains(e.target) && e.target!==bell && !bell.contains(e.target)){
+    panel.classList.remove('open');
+  }
+});
+processLogin(STATE.currentUser);
+renderAll();
+</script>
+</body>
+</html>
