@@ -10,14 +10,7 @@ CampusBoost encourages university students to spend more time learning on campus
 
 The entire application is contained in a single `ScholaRise.html` file. Open it directly in any modern browser (Chrome, Firefox, Edge) — no server or installation required.
 
-```bash
-git clone https://github.com/demented20/
-cd campusboost
-# then open game-html.html in your browser
-
-to adapt it for educational purposes.
-
-# 🎮 Gamification Features
+##🎮 Gamification Features
 # 🕒 Campus Study Timer
 Start/pause a study session and select a campus location.
 
@@ -87,3 +80,11 @@ Random daily “Lucky Location” gives double SP.
 “Explorer” badge for studying in 5 different places.
 
 Friends list, head‑to‑head study races, and a public Pledge Wall keep users accountable.
+
+
+```bash
+git clone https://github.com/demented20/
+cd campusboost
+# then open game-html.html in your browser
+
+to adapt it for educational purposes.
